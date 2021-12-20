@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageUser"
+            android:layout_width="51dp"
+            android:layout_height="53dp"
+            tools:srcCompat="@drawable/user_icon" />
+
+        <TextView
+            android:id="@+id/textView_NomeUtente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NomeUtente" />
+
+        <TextView
+            android:id="@+id/textView_Minuti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 m" />
+
+        <TextView
+            android:id="@+id/textView_Titolo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NomeSentiero" />
+
+        <TextView
+            android:id="@+id/textView_Descrizione"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descrizione sentiero Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquet est finibus egestas varius. Donec eget et venenatis tortor" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView2"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:layout_width="358dp"
+            android:layout_height="211dp"
+            map:liteMode="true"
+
+
+            />
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

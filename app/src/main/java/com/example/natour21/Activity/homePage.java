@@ -1,40 +1,45 @@
 package com.example.natour21.Activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.natour21.Controller.authenticationController;
 import com.example.natour21.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 public class homePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepage);
+        setContentView(R.layout.activity_home_page);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        Button btnLogout = findViewById(R.id.btnLogout);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                authenticationController.logout(homePage.this, authenticationController.auth, false);
-            }
-        });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.show();
 
-        TextView accesstoken = findViewById(R.id.accessToken);
-        TextView refreshtoken = findViewById(R.id.refreshToken);
-        TextView email = findViewById(R.id.email);
-        TextView auth = findViewById(R.id.auth);
 
-        accesstoken.setText("AccessToken: " + authenticationController.accessToken);
-        refreshtoken.setText("RefreshToken: " + authenticationController.refreshToken);
-        email.setText("Email: " + authenticationController.userEmail);
-        auth.setText("Auth: " + authenticationController.auth);
+    }
 
+    public void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
     }
 }

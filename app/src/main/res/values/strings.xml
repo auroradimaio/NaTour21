@@ -1,22 +1,12 @@
 <resources>
     <string name="app_name">NaTour21</string>
-    <string name="title">NaTour21</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_passowrd">Password</string>
-    <string name="hint_firstName">Nome</string>
-    <string name="hint_lastName">Cognome</string>
-    <string name="hint_passwordRequire">La password deve contenere almeno 6 caratteri</string>
-    <string name="hint_confirmPassowrd">Conferma password</string>
-    <string name="rememberMe">Ricordami</string>
-    <string name="forgotPassword">Password dimenticata?</string>
-    <string name="logWithGoogle">ACCEDI CON GOOGLE</string>
-    <string name="logWithFacebook">ACCEDI CON FACEBOOK</string>
-    <string name="login">ACCEDI</string>
-    <string name="register">REGISTRATI</string>
-
-    <!-- Facebook Strings -->
-    <string name="facebook_app_id">573964120424560</string>
-    <string name="fb_login_protocol_scheme">fb573964120424560</string>
+    <string name="title_activity_home_page">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="google_maps_api_key">AIzaSyDVQ-0d9dN0BtMw0J4X45DeKwAJYKItnQE</string>
 
 
 </resources>
