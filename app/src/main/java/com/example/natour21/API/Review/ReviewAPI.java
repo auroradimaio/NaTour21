@@ -30,18 +30,15 @@ public class ReviewAPI {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                  //  JSONArray jsonArray = response.getJSONArray("result");
-                    JSONObject res = response.getJSONObject("result");
 
-                  //  for (int i = 0; i < res.length(); i++) {
-                       // JSONObject res = jsonArray.getJSONObject(i);
+                    JSONObject res = response.getJSONObject("result");
 
                         String description = res.getString("description");
                         float value = (float) res.getDouble("value");
 
 
                         mReviewList.add(new ReviewItem(value, description));
-                  //  }
+
 
                     mp[0] = new ReviewAdapter(activity, mReviewList);
                     mRecyclerView.setAdapter(mp[0]);
