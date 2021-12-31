@@ -11,14 +11,16 @@ public class PostItem {
     private String Titolo;
     private String Descrizione;
     private String Minuti;
-    private Double Lat1;
-    private Double Lat2;
-    private Double Lon1;
-    private Double Lon2;
+    double Lat1;
+    double Lat2;
+    double Lon1;
+    double Lon2;
+    int Review;
+    int Id;
 
 
 
-    public PostItem(String descr, String min, String tit, double lat1, double lat2, double lon1, double lon2){
+    public PostItem(String descr, String min, String tit, double lat1, double lat2, double lon1, double lon2, int review, int id){
 
         Titolo=tit;
         Descrizione=descr;
@@ -27,6 +29,9 @@ public class PostItem {
         Lat2=lat2;
         Lon1=lon1;
         Lon2=lon2;
+        Review = review;
+        Id=id;
+
 
     }
 
@@ -50,14 +55,23 @@ public class PostItem {
         return Minuti;
     }
 
-    public double getLat1(){
-        return Lat1;}
+    public double getLat1(){return Lat1;}
 
-    public double getLat2(){return Lat2;}
+    public double getLat2() {
+        return Lat2;
+    }
 
-    public double getLon1(){return Lon1;}
+    public double getLon1() {
+        return Lon1;
+    }
 
-    public Double getLon2() {
+    public double getLon2() {
         return Lon2;
     }
+
+    public int getReview() {
+        return Review;
+    }
+
+    public int getId(){return Id;}
 }

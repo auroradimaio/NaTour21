@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_inserimentoItinerario"
             app:destination="@id/inserimentoItinerario" />
+        <action
+            android:id="@+id/action_navigation_home_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
     </fragment>
 
     <fragment
@@ -42,4 +45,9 @@
         android:id="@+id/mapsFragment2"
         android:name="com.example.natour21.ui.fragments.mapsFragment"
         android:label="mapsFragment" />
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.example.natour21.Fragments.postDetailsFragment"
+        android:label="fragment_post_details"
+        tools:layout="@layout/fragment_post_details" />
 </navigation>

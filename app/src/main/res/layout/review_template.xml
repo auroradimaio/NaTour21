@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:padding="16dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="141dp">
+
+
+            <ImageView
+                android:id="@+id/userIcon_imageView"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/user_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.053"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/username_TextView"
+                android:layout_width="140dp"
+                android:layout_height="19dp"
+                android:layout_marginTop="4dp"
+                android:text="Nome Utente"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.074"
+                app:layout_constraintStart_toEndOf="@+id/userIcon_imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RatingBar
+                android:id="@+id/ratingBar2"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="81dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="12dp"
+                android:numStars="5"
+                android:stepSize="1"
+                app:layout_constraintEnd_toStartOf="@+id/username_TextView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/userIcon_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/username_TextView" />
+
+            <TextView
+                android:id="@+id/reviewDescription_textView"
+                android:layout_width="301dp"
+                android:layout_height="78dp"
+                android:text="Descrizione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userIcon_imageView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

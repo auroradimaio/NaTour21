@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.postDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/nomeSentiero_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nome Sentiero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/descrizione_textView"
+            android:layout_width="306dp"
+            android:layout_height="111dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="296dp"
+            android:text="Descrizione sentiero lorem ipsum iefe kekdfms oewperkefdlf lfsief oefk fedsf dfnsd sd dfsjf fkosdjf fjeo fe jfi fjisjfcfdl vikfnielfn eiefjewoifc vjeow vmkov eo vsvkd voe  "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.003"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomeSentiero_textView" />
+
+        <TextView
+            android:id="@+id/difficoltà_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="289dp"
+            android:text="Difficoltà sentiero:"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.148"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descrizione_textView" />
+
+        <TextView
+            android:id="@+id/valoreDifficoltà_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="144dp"
+            android:text="ELEVATA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/difficoltà_textView"
+            app:layout_constraintTop_toBottomOf="@+id/descrizione_textView" />
+
+        <TextView
+            android:id="@+id/puntoInizio_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="265dp"
+            android:text="Punto di inizio:"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/durata_textView" />
+
+        <TextView
+            android:id="@+id/durata_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Durata sentiero:"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficoltà_textView" />
+
+        <TextView
+            android:id="@+id/valoreDurata_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="186dp"
+            android:text="3h"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/durata_textView"
+            app:layout_constraintTop_toBottomOf="@+id/valoreDifficoltà_textView" />
+
+        <TextView
+            android:id="@+id/valorePuntoInizio_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="123dp"
+            android:text="Via Manzoni"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/puntoInizio_textView"
+            app:layout_constraintTop_toBottomOf="@+id/valoreDurata_textView" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/dettaglio_mapView"
+            android:layout_width="301dp"
+            android:layout_height="163dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="46dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/valorePuntoInizio_textView" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="268dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="63dp"
+            android:text="MODIFICA DURATA O DIFFICOLTA'"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dettaglio_mapView" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dettagli_RecyclerView"
+            android:layout_width="358dp"
+            android:layout_height="143dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+        <TextView
+            android:id="@+id/recensioniTotale_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Recensioni sentiero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="81dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:numStars="5"
+            android:stepSize="0.2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recensioniTotale_textView" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="151dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="8dp"
+            android:text="Aggiungi \n recensione"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.859"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

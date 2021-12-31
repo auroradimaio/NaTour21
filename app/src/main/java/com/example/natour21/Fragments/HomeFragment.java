@@ -1,7 +1,6 @@
 package com.example.natour21.Fragments;
 
 import android.os.Bundle;
-import android.service.voice.VoiceInteractionSession;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,22 +23,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.directions.route.Route;
-import com.directions.route.RouteException;
-import com.directions.route.Routing;
-import com.directions.route.RoutingListener;
-import com.example.natour21.API.Post.PostAPI;
 import com.example.natour21.Activity.homePage;
 
 
-import com.example.natour21.PostAdaptor;
+import com.example.natour21.PostAdapter;
 import com.example.natour21.PostItem;
 import com.example.natour21.R;
-import com.example.natour21.Volley.VolleySingleton;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 
 import org.json.JSONArray;
@@ -47,41 +36,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.directions.route.Route;
-import com.directions.route.RouteException;
-import com.directions.route.Routing;
-import com.directions.route.RoutingListener;
-import com.example.natour21.API.Waypoints.WaypointsAPI;
-import com.example.natour21.Constants;
-import com.example.natour21.R;
-import com.example.natour21.Volley.VolleyCallback;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback;
 
-public class HomeFragment extends Fragment  {
+public class HomeFragment extends Fragment implements PostAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
-    private PostAdaptor mPostAdaptor;
+    private PostAdapter mPostAdapter;
     private ArrayList<PostItem> mPostList;
     private RequestQueue mRequestQueue;
 
-    double lat1,lat2,lon1,lon2;
-    GoogleMap map;
-    MarkerOptions place1;
-    MarkerOptions place2;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,9 +73,12 @@ public class HomeFragment extends Fragment  {
 
         mPostList = new ArrayList<>();
 
+
+
+
         mRequestQueue = Volley.newRequestQueue(getActivity());
-        PostAPI.getPosts(getActivity(),mPostList,mPostAdaptor,mRecyclerView,mRequestQueue);
-       // parseJson2();
+        parseJSON();
+
 
 
         Button button = (Button)view.findViewById(R.id.btnInsertPath);
@@ -137,11 +104,14 @@ public class HomeFragment extends Fragment  {
     @Override
     public void onResume() {
         ((homePage)getActivity()).setActionBarTitle("NaTour21");
+        BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
+        navView.setVisibility(navView.VISIBLE);
+
         super.onResume();
     }
 
-    /*private void parseJSON(){
-        String url = "http://192.168.1.104:8080/api/posts";
+    private void parseJSON(){
+        String url = "http://192.168.1.10:8080/api/posts";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -151,20 +121,43 @@ public class HomeFragment extends Fragment  {
 
                     for(int i = 0; i<jsonArray.length();i++){
                         JSONObject res = jsonArray.getJSONObject(i);
-
                         String title = res.getString("title");
                         String description = res.getString("description");
                         String minutes = (String) res.get("minutes");
-                        //Toast.makeText(getActivity(),title,Toast.LENGTH_LONG).show();
+                        int review = res.getInt("review");
+                        double lat1 = res.getJSONObject("way").getDouble("lat1");
+                        double lat2 = res.getJSONObject("way").getDouble("lat2");
+                        double lon1 = res.getJSONObject("way").getDouble("lon1");
+                        double lon2 = res.getJSONObject("way").getDouble("lon2");
+                        int id = res.getInt("id");
 
-                        mPostList.add(new PostItem(description,minutes,title));
+                        JSONArray revArray = res.getJSONArray("rev");
+                        for(int j=0;j<revArray.length();j++) {
 
+                            JSONObject rev = revArray.getJSONObject(j);
+
+                          /*  String title = res.getString("title");
+                            String description = res.getString("description");
+                            String minutes = (String) res.get("minutes");
+                            int review = res.getInt("review");
+                            double lat1 = res.getJSONObject("way").getDouble("lat1");
+                            double lat2 = res.getJSONObject("way").getDouble("lat2");
+                            double lon1 = res.getJSONObject("way").getDouble("lon1");
+                            double lon2 = res.getJSONObject("way").getDouble("lon2");*/
+                            String revDescr = rev.getString("description");
+
+                            Log.i("Review", "Risultato=" + revDescr);
+
+
+                        }
+                        mPostList.add(new PostItem(description, minutes, title, lat1, lat2, lon1, lon2, review,id));
                     }
 
 
 
-                    mPostAdaptor = new PostAdaptor(getContext(),mPostList);
-                    mRecyclerView.setAdapter(mPostAdaptor);
+                    mPostAdapter = new PostAdapter(getContext(),mPostList);
+                    mRecyclerView.setAdapter(mPostAdapter);
+                    mPostAdapter.setOnItemClickListener(HomeFragment.this::onItemClick);
 
 
 
@@ -184,118 +177,37 @@ public class HomeFragment extends Fragment  {
 
         mRequestQueue.add(request);
 
-    }*/
-
-    /*public void parseJson2(){
-        String url = "http://192.168.1.104:8080/api/waypoints/id?id=1";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("result");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject res = jsonArray.getJSONObject(i);
-
-                        lat1 = res.getDouble("lat1");
-                        lat2 = res.getDouble("lat2");
-                        lon1 = res.getDouble("lon1");
-                        lon2 = res.getDouble("lon2");
-
-                    }
-                    place1 = new MarkerOptions().position(new LatLng(lat1, lon1)).title("Inizio");
-                    place2 = new MarkerOptions().position(new LatLng(lat2, lon2)).title("Destinazione");
-
-                    getRoutingPath(place1.getPosition(),place2.getPosition());
-
-
-
-
-
-                } catch (JSONException jsonException) {
-                    jsonException.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        }
-        );
-
-        mRequestQueue.add(request);
     }
+
+
+
 
 
     @Override
-    public void onRoutingFailure(RouteException e) {
+    public void onItemClick(int position) {
+        Toast.makeText(getActivity(),"pos="+position,Toast.LENGTH_LONG);
+        Fragment fragment = new Fragment();
+        Bundle bundle = new Bundle();
+        PostItem clickedItem = mPostList.get(position);
+        bundle.putString("Titolo",clickedItem.getTitolo());
+        bundle.putString("Descrizione",clickedItem.getDescrizione());
+       // bundle.putInt("Durata",clickedItem.getDurata());
+      //  bundle.putString("Difficotà",clickedItem.getDifficoltà());
+       // bundle.putString("PuntoInizio",clickedItem.getPuntoInizio());
+        bundle.putDouble("Lat1",clickedItem.getLat1());
+        bundle.putDouble("Lat2",clickedItem.getLat2());
+        bundle.putDouble("Lon1",clickedItem.getLon1());
+        bundle.putDouble("Lon2",clickedItem.getLon2());
+        bundle.putInt("Id",clickedItem.getId());
+
+        fragment.setArguments(bundle);
+
+
+
+
+        Log.i("Click","posizioine= "+position+ "descrizione="+clickedItem.getDescrizione() + "recensione= "+clickedItem.getReview()+"lat1"+clickedItem.getLat1()+"id="+clickedItem.getId());
+        Navigation.findNavController(mRecyclerView).navigate(R.id.action_navigation_home_to_postDetailsFragment,bundle);
 
     }
-
-    @Override
-    public void onRoutingStart() {
-
-    }
-
-    @Override
-    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
-
-
-        Log.e("check", "onRoutingSuccess");
-
-        List<Polyline> polylines = new ArrayList<>();
-
-
-        if (polylines.size() > 0) {
-            for (Polyline poly : polylines) {
-                poly.remove();
-            }
-        }
-
-        polylines = new ArrayList<>();
-
-        for (int i = 0; i < route.size(); i++) {
-
-
-
-
-            PolylineOptions polyOptions = new PolylineOptions();
-            polyOptions.color(R.color.black);
-            polyOptions.width(10 + i * 3);
-            polyOptions.addAll(route.get(i).getPoints());
-            Polyline polyline = map.addPolyline(polyOptions);
-            polylines.add(polyline);
-
-
-
-
-        }
-
-
-    }
-
-    @Override
-    public void onRoutingCancelled() {
-
-    }
-
-
-    private void getRoutingPath(LatLng lt1, LatLng lt2) {
-
-
-        try {
-
-            Routing routing = new Routing.Builder()
-                    .travelMode(Routing.TravelMode.WALKING)
-                    .withListener(this)
-                    .waypoints(lt1, lt2)
-                    .key(getString(R.string.google_maps_api_key))
-                    .build();
-            routing.execute();
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), "Sentiero non valido", Toast.LENGTH_SHORT).show();
-        }
-    }*/
 }
 
