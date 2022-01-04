@@ -1,4 +1,4 @@
-package com.example.natour21;
+package com.example.natour21.Item;
 
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,10 +17,12 @@ public class PostItem {
     double Lon2;
     int Review;
     int Id;
+    private String Difficoltà;
+    private String Durata;
+    private String Startpoint;
 
 
-
-    public PostItem(String descr, String min, String tit, double lat1, double lat2, double lon1, double lon2, int review, int id){
+    public PostItem(String descr, String min, String tit, double lat1, double lat2, double lon1, double lon2,  int id,String difficoltà, String durata, String startpoint){
 
         Titolo=tit;
         Descrizione=descr;
@@ -29,8 +31,10 @@ public class PostItem {
         Lat2=lat2;
         Lon1=lon1;
         Lon2=lon2;
-        Review = review;
         Id=id;
+        Difficoltà=difficoltà;
+        Durata=durata;
+        Startpoint=startpoint;
 
 
     }
@@ -69,9 +73,13 @@ public class PostItem {
         return Lon2;
     }
 
-    public int getReview() {
-        return Review;
-    }
+
 
     public int getId(){return Id;}
+
+    public String getDifficoltà(){return Difficoltà;}
+
+    public String getDurata(){return Durata;}
+
+    public String getStartpoint(){return Startpoint;}
 }

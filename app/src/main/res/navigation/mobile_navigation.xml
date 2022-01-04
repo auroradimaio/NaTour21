@@ -49,5 +49,22 @@
         android:id="@+id/postDetailsFragment"
         android:name="com.example.natour21.Fragments.postDetailsFragment"
         android:label="fragment_post_details"
-        tools:layout="@layout/fragment_post_details" />
+        tools:layout="@layout/fragment_post_details" >
+        <action
+            android:id="@+id/action_postDetailsFragment_to_insertReviewFragment"
+            app:destination="@id/insertReviewFragment" />
+        <action
+            android:id="@+id/action_postDetailsFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertReviewFragment"
+        android:name="com.example.natour21.Fragments.insertReviewFragment"
+        android:label="fragment_insert_review"
+        tools:layout="@layout/fragment_insert_review" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.natour21.Fragments.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
 </navigation>

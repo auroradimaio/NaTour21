@@ -26,8 +26,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.natour21.Activity.homePage;
 
 
-import com.example.natour21.PostAdapter;
-import com.example.natour21.PostItem;
+import com.example.natour21.Adapter.PostAdapter;
+import com.example.natour21.Item.PostItem;
 import com.example.natour21.R;
 
 
@@ -111,47 +111,43 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
     }
 
     private void parseJSON(){
-        String url = "http://192.168.1.10:8080/api/posts";
+        String url = "http://192.168.1.14:8080/api/posts";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 try {
+                    double lat1=0,lat2=0,lon1=0,lon2=0;
                     JSONArray jsonArray = response.getJSONArray("result");
 
                     for(int i = 0; i<jsonArray.length();i++){
                         JSONObject res = jsonArray.getJSONObject(i);
+                        try {
+                            JSONObject way = res.getJSONObject("way");
+
+                            lat1 = way.getDouble("lat1");
+                            lat2 = way.getDouble("lat2");
+                            lon1 = way.getDouble("lon1");
+                            lon2 = way.getDouble("lon2");
+                        }catch (JSONException je){
+
+                        }
+
+
                         String title = res.getString("title");
                         String description = res.getString("description");
                         String minutes = (String) res.get("minutes");
-                        int review = res.getInt("review");
-                        double lat1 = res.getJSONObject("way").getDouble("lat1");
-                        double lat2 = res.getJSONObject("way").getDouble("lat2");
-                        double lon1 = res.getJSONObject("way").getDouble("lon1");
-                        double lon2 = res.getJSONObject("way").getDouble("lon2");
+                        String min = res.getString("minutes");
+                        String difficulty = res.getString("difficulty");
+                        String startpoint = res.getString("startpoint");
+
+
                         int id = res.getInt("id");
 
-                        JSONArray revArray = res.getJSONArray("rev");
-                        for(int j=0;j<revArray.length();j++) {
 
-                            JSONObject rev = revArray.getJSONObject(j);
-
-                          /*  String title = res.getString("title");
-                            String description = res.getString("description");
-                            String minutes = (String) res.get("minutes");
-                            int review = res.getInt("review");
-                            double lat1 = res.getJSONObject("way").getDouble("lat1");
-                            double lat2 = res.getJSONObject("way").getDouble("lat2");
-                            double lon1 = res.getJSONObject("way").getDouble("lon1");
-                            double lon2 = res.getJSONObject("way").getDouble("lon2");*/
-                            String revDescr = rev.getString("description");
-
-                            Log.i("Review", "Risultato=" + revDescr);
-
-
-                        }
-                        mPostList.add(new PostItem(description, minutes, title, lat1, lat2, lon1, lon2, review,id));
+                        mPostList.add(new PostItem(description, minutes, title, lat1, lat2, lon1, lon2,id,difficulty,min,startpoint));
                     }
+
 
 
 
@@ -191,9 +187,9 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
         PostItem clickedItem = mPostList.get(position);
         bundle.putString("Titolo",clickedItem.getTitolo());
         bundle.putString("Descrizione",clickedItem.getDescrizione());
-       // bundle.putInt("Durata",clickedItem.getDurata());
-      //  bundle.putString("Difficotà",clickedItem.getDifficoltà());
-       // bundle.putString("PuntoInizio",clickedItem.getPuntoInizio());
+        bundle.putString("Durata",clickedItem.getDurata());
+        bundle.putString("Difficoltà",clickedItem.getDifficoltà());
+        bundle.putString("PuntoInizio",clickedItem.getStartpoint());
         bundle.putDouble("Lat1",clickedItem.getLat1());
         bundle.putDouble("Lat2",clickedItem.getLat2());
         bundle.putDouble("Lon1",clickedItem.getLon1());
@@ -205,7 +201,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
 
 
 
-        Log.i("Click","posizioine= "+position+ "descrizione="+clickedItem.getDescrizione() + "recensione= "+clickedItem.getReview()+"lat1"+clickedItem.getLat1()+"id="+clickedItem.getId());
+        Log.i("Click","posizioine= "+position+ "descrizione="+clickedItem.getDescrizione() + "lat1"+clickedItem.getLat1()+"id="+clickedItem.getId()+"durata, diff e punto inizio"+clickedItem.getDurata()+clickedItem.getDifficoltà()+clickedItem.getStartpoint());
         Navigation.findNavController(mRecyclerView).navigate(R.id.action_navigation_home_to_postDetailsFragment,bundle);
 
     }

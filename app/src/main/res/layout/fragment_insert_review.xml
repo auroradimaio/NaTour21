@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.insertReviewFragment">
+
+    <TextView
+        android:id="@+id/pathName_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Nome Itinerario"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/comment_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Commento"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pathNameValue_textView" />
+
+    <TextView
+        android:id="@+id/rating_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Valutazione"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comment_editTextTextMultiLine" />
+
+    <EditText
+        android:id="@+id/comment_editTextTextMultiLine"
+        android:layout_width="301dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/green"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comment_textView" />
+
+    <TextView
+        android:id="@+id/pathNameValue_textView"
+        android:layout_width="302dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="12dp"
+        android:text="nomePath"
+        android:textColor="@color/yellow"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pathName_textView" />
+
+    <RatingBar
+        android:id="@+id/review_ratingBar"
+        style="=?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:theme="@style/RatingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rating_textView" />
+
+    <Button
+        android:id="@+id/publishReview_button"
+        android:layout_width="137dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="92dp"
+        android:background="@drawable/btn_general"
+        android:text="Pubblica"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_ratingBar" />
+</androidx.constraintlayout.widget.ConstraintLayout>

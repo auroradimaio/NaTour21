@@ -2,7 +2,6 @@ package com.example.natour21.Fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -32,11 +32,10 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
-import com.example.natour21.API.Waypoints.WaypointsAPI;
 import com.example.natour21.Constants;
+import com.example.natour21.Controller.PostController;
 import com.example.natour21.Controller.WaypointsController;
 import com.example.natour21.R;
-import com.example.natour21.Volley.VolleyCallback;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,19 +48,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +92,8 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
 
     Button btnIns;
     Button btnPubblica;
-
+    EditText title,description,startPoint,time;
+    Spinner time_spinner;
 
 
 
@@ -164,10 +159,17 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
         });
 
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner2);
+
+        time = view.findViewById(R.id.time_editText);
+        title= view.findViewById(R.id.title_editText);
+        description = view.findViewById(R.id.description_editText);
+        startPoint = view.findViewById(R.id.startPoint_editText);
+
+        time_spinner = (Spinner) view.findViewById(R.id.difficulty_spinner);
         String[] items = new String[]{"Facile", "Media", "Difficile"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, items);
-        spinner.setAdapter(adapter);
+        time_spinner.setAdapter(adapter);
+
 
 
 
@@ -191,7 +193,8 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
         btnPubblica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                PostController.InsertPost(getActivity(),title.getText().toString(),description.getText().toString(),time.getText().toString()
+                        ,time_spinner.getSelectedItem().toString(),startPoint.getText().toString());
             }
         });
 
@@ -294,7 +297,6 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
                         btnIns.setEnabled(false);
                         btnIns.setAlpha(.5f);
 
-                        WaypointsController.insertWaypoints(getActivity(),lat1,lng1,lat2,lng2);
 
 
                     }

@@ -1,6 +1,7 @@
-package com.example.natour21;
+package com.example.natour21.Adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
@@ -17,6 +19,8 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.example.natour21.Item.PostItem;
+import com.example.natour21.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -121,6 +125,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
 

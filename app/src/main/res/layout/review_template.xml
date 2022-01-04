@@ -36,6 +36,8 @@
                 android:layout_height="19dp"
                 android:layout_marginTop="4dp"
                 android:text="Nome Utente"
+                android:textColor="@color/green"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.074"
                 app:layout_constraintStart_toEndOf="@+id/userIcon_imageView"
@@ -48,8 +50,9 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="12dp"
                 android:numStars="5"
-                android:stepSize="1"
-                app:layout_constraintEnd_toStartOf="@+id/username_TextView"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/userIcon_imageView"
                 app:layout_constraintTop_toBottomOf="@+id/username_TextView" />
@@ -57,8 +60,10 @@
             <TextView
                 android:id="@+id/reviewDescription_textView"
                 android:layout_width="301dp"
-                android:layout_height="78dp"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
                 android:text="Descrizione"
+                android:textColor="@color/green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userIcon_imageView" />

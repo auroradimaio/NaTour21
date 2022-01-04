@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/motionLay"
+    app:layoutDescription="@xml/fragment_post_details_scene"
     tools:context=".Fragments.postDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/constraintLayout5"
+        android:layout_width="394dp"
+        android:layout_height="620dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/nomeSentiero_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:text="Nome Sentiero"
+            android:textColor="@color/green"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/descrizione_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,13 +35,15 @@
         <TextView
             android:id="@+id/descrizione_textView"
             android:layout_width="306dp"
-            android:layout_height="111dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="296dp"
+            android:singleLine="false"
             android:text="Descrizione sentiero lorem ipsum iefe kekdfms oewperkefdlf lfsief oefk fedsf dfnsd sd dfsjf fkosdjf fjeo fe jfi fjisjfcfdl vikfnielfn eiefjewoifc vjeow vmkov eo vsvkd voe  "
+            android:textColor="@color/green"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.003"
+            app:layout_constraintHorizontal_bias="0.004"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nomeSentiero_textView" />
 
@@ -43,6 +55,8 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="289dp"
             android:text="Difficoltà sentiero:"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.148"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +70,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="144dp"
             android:text="ELEVATA"
+            android:textColor="@color/green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/difficoltà_textView"
             app:layout_constraintTop_toBottomOf="@+id/descrizione_textView" />
@@ -68,6 +83,8 @@
             android:layout_marginTop="27dp"
             android:layout_marginEnd="265dp"
             android:text="Punto di inizio:"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Durata sentiero:"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.133"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +111,7 @@
             android:layout_marginTop="27dp"
             android:layout_marginEnd="186dp"
             android:text="3h"
+            android:textColor="@color/green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/durata_textView"
             app:layout_constraintTop_toBottomOf="@+id/valoreDifficoltà_textView" />
@@ -104,6 +124,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="123dp"
             android:text="Via Manzoni"
+            android:textColor="@color/green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/puntoInizio_textView"
@@ -121,14 +142,30 @@
             app:layout_constraintTop_toBottomOf="@+id/valorePuntoInizio_textView" />
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="268dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="62dp"
-            android:layout_marginTop="13dp"
+            android:id="@+id/modify_button"
+            android:layout_width="156dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="63dp"
+            android:background="@drawable/btn_general"
             android:text="MODIFICA DURATA O DIFFICOLTA'"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dettaglio_mapView" />
+
+        <Button
+            android:id="@+id/report_button"
+            android:layout_width="156dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/btn_general"
+            android:text="Inserisci Segnalazione"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.878"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dettaglio_mapView" />
 
@@ -141,17 +178,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dettagli_RecyclerView"
-            android:layout_width="358dp"
-            android:layout_height="143dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.485"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
+            app:layout_constraintTop_toBottomOf="@+id/modify_button" />
 
         <TextView
             android:id="@+id/recensioniTotale_textView"
@@ -159,6 +186,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Recensioni sentiero"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.107"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,21 +200,46 @@
             android:layout_height="20dp"
             android:layout_marginTop="4dp"
             android:numStars="5"
-            android:stepSize="0.2"
+            android:stepSize="0.5"
+            android:theme="@style/RatingBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.092"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recensioniTotale_textView" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/addReview_button"
             android:layout_width="151dp"
             android:layout_height="57dp"
             android:layout_marginTop="8dp"
+            android:background="@drawable/btn_general"
             android:text="Aggiungi \n recensione"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.859"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+        <TextView
+            android:id="@+id/reviewValue_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:text="5.0"
+            android:textColor="@color/green"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toBottomOf="@+id/recensioniTotale_textView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dettagli_RecyclerView"
+        android:layout_width="394dp"
+        android:layout_height="290dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

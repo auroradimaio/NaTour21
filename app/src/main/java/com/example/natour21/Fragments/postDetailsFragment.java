@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +27,12 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.natour21.API.Review.ReviewAPI;
 import com.example.natour21.Constants;
+import com.example.natour21.Controller.PostController;
+import com.example.natour21.Item.PostItem;
+import com.example.natour21.PostDialog;
 import com.example.natour21.R;
-import com.example.natour21.ReviewAdapter;
-import com.example.natour21.ReviewItem;
+import com.example.natour21.Adapter.ReviewAdapter;
+import com.example.natour21.Item.ReviewItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -40,7 +47,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class postDetailsFragment extends Fragment implements OnMapReadyCallback, RoutingListener {
+public class postDetailsFragment extends Fragment implements OnMapReadyCallback, RoutingListener, PostDialog.PostDialogListener {
 
     TextView descrizione_textView;
     TextView titolo_textView;
@@ -53,6 +60,12 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewItem> mReviewList;
     private RequestQueue mRequestQueue;
+    private RatingBar ratingBar;
+    TextView valoreReview_textView;
+    Button modifyButton, reviewButton, reportButton;
+    PostDialog postDialog = new PostDialog();
+    TextView valoreDifficoltà, valoreDurata, valorePuntoInizio;
+    MotionLayout motionLayout;
 
 
     @Override
@@ -88,9 +101,14 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
 
 
 
+
+
         Bundle bundle = this.getArguments();
         String descrizione = bundle.getString("Descrizione");
         String titolo = bundle.getString("Titolo");
+        String difficoltà = bundle.getString("Difficoltà");
+        String durata = bundle.getString("Durata");
+        String startpoint = bundle.getString("PuntoInizio");
          lat1 = bundle.getDouble("Lat1");
          lon1 = bundle.getDouble("Lon1");
          lon2 = bundle.getDouble("Lon2");
@@ -103,14 +121,66 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
         Log.i("valori latlon=","lat1="+lat1+"lon1"+lon1+"lon2"+lon2+"lat2"+lat2);*/
 
 
+
+        reportButton = v.findViewById(R.id.report_button);
+
+        motionLayout = v.findViewById(R.id.motionLay);
+
+        valoreDifficoltà = v.findViewById(R.id.valoreDifficoltà_textView);
+        valoreDifficoltà.setText(difficoltà);
+
+        valorePuntoInizio = v.findViewById(R.id.valoreDifficoltà_textView);
+        valorePuntoInizio.setText(startpoint);
+
+        valoreDurata = v.findViewById(R.id.valoreDurata_textView);
+        valoreDurata.setText(durata);
+
         descrizione_textView = (TextView)v.findViewById(R.id.descrizione_textView);
         descrizione_textView.setText(descrizione);
+
         titolo_textView = (TextView)v.findViewById(R.id.nomeSentiero_textView);
         titolo_textView.setText(titolo);
 
-        ReviewAPI.getReviewsById(getActivity(),mReviewList,mReviewAdapter,mRecyclerView,mRequestQueue,id);
+        ratingBar = (RatingBar)v.findViewById(R.id.ratingBar);
+
+        valoreReview_textView = (TextView)v.findViewById(R.id.reviewValue_textView);
+
+        modifyButton = v.findViewById(R.id.modify_button);
+
+        reviewButton = v.findViewById(R.id.addReview_button);
+
+        ReviewAPI.getReviewsById(getActivity(),mReviewList,mReviewAdapter,mRecyclerView,mRequestQueue,id,ratingBar,valoreReview_textView,motionLayout);
+
+        Fragment fragment = new Fragment();
+        Bundle bundleDetails = new Bundle();
+        bundleDetails.putInt("IdPost",id);
+        bundleDetails.putString("TitoloSentiero",titolo);
+
+        reportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_postDetailsFragment_to_reportFragment,bundleDetails);
+            }
+        });
 
 
+        modifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
+
+
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                fragment.setArguments(bundleDetails);
+                Navigation.findNavController(view).navigate(R.id.action_postDetailsFragment_to_insertReviewFragment,bundleDetails);
+            }
+        });
 
 
 
@@ -260,5 +330,21 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
         } catch (Exception e) {
             Toast.makeText(getActivity(), "Sentiero non valido", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    public void openDialog(){
+
+        postDialog.setTargetFragment(this,1);
+        postDialog.show(getFragmentManager().beginTransaction(),"Post Dialog");
+    }
+
+
+    @Override
+    public void applyChanges(String difficulty, String minutes) {
+        Toast.makeText(getActivity(),"diff"+difficulty+minutes+id,Toast.LENGTH_SHORT).show();
+        PostController.UpdatePost(getActivity(),difficulty,minutes,id);
+        postDialog.dismiss();
+
     }
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ReportFragment">
+
+    <Button
+        android:id="@+id/publishReport_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="456dp"
+        android:text="Pubblica"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_general"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reportTitle_textView"
+        android:layout_width="67dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="128dp"
+        android:text="Titolo:"
+        android:textSize="15dp"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reportDescription_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="216dp"
+        android:text="Commento:"
+        android:textSize="15dp"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/reportTitle_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:backgroundTint="@color/green"
+        android:ems="10"
+        android:hint="Titolo..."
+        android:inputType="textPersonName"
+        android:textColor="@color/green"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toEndOf="@+id/reportTitle_textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/reportDescription_EditText"
+        android:layout_width="211dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:backgroundTint="@color/green"
+        android:textSize="15dp"
+        android:textColor="@color/green"
+        android:hint="Inserisci la tua descrizione..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/IntroReport_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:textSize="17dp"
+        android:textColor="@color/green"
+        android:text="Stai lasciando una segnalazione per il sentiero:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pathNameReport_textView"
+        android:layout_width="199dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="9dp"
+        android:text="nomeSentiero"
+        android:gravity="center"
+        android:textColor="@color/yellow"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IntroReport_textView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

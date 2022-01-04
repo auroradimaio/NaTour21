@@ -154,7 +154,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTime"
+        android:id="@+id/time_editText"
         android:layout_width="189dp"
         android:layout_height="41dp"
         android:layout_marginTop="80dp"
@@ -170,7 +170,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/title_editText"
         android:layout_width="187dp"
         android:layout_height="44dp"
         android:layout_marginTop="16dp"
@@ -186,7 +186,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/difficulty_spinner"
         android:layout_width="184dp"
         android:layout_height="37dp"
         android:layout_marginTop="152dp"
@@ -198,7 +198,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <EditText
-        android:id="@+id/editTextTextPostalAddress"
+        android:id="@+id/startPoint_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="224dp"
@@ -212,7 +212,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/description_editText"
         android:layout_width="188dp"
         android:layout_height="42dp"
         android:layout_marginTop="300dp"
