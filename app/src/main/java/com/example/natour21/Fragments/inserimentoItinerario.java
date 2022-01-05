@@ -75,10 +75,10 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
 
     private MapView mMapView;
     int i = 0;
-    double lat1;
-    double lat2;
-    double lng1;
-    double lng2;
+    double lat1=0;
+    double lat2=0;
+    double lng1=0;
+    double lng2=0;
     String trigger = "no";
 
     MarkerOptions place1;
@@ -193,9 +193,22 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
         btnPubblica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PostController.InsertPost(getActivity(),title.getText().toString(),description.getText().toString(),time.getText().toString()
-                        ,time_spinner.getSelectedItem().toString(),startPoint.getText().toString());
-            }
+
+                if((title.getText().toString().isEmpty() || description.getText().toString().isEmpty() || time.getText().toString().isEmpty() || time_spinner.getSelectedItem().toString()
+                ==null || startPoint.getText().toString().isEmpty()) || (lat1 == 0 || lat2 == 0 || lng1 == 0 || lng2 == 0)){
+                    Toast.makeText(getActivity(),"Inserire tutti i campi/Sentiero non valido",Toast.LENGTH_SHORT).show();
+                }else{
+
+                    PostController.InsertPost(getActivity(), title.getText().toString(), description.getText().toString(), time.getText().toString()
+                            , time_spinner.getSelectedItem().toString(), startPoint.getText().toString());
+                    WaypointsController.insertWaypoints(getActivity(),lat1,lng1,lat2,lng2);
+
+                    Toast.makeText(getActivity(), " valido", Toast.LENGTH_SHORT).show();
+                }
+
+                }
+
+
         });
 
 

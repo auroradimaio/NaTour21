@@ -65,8 +65,14 @@ public class insertReviewFragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"Valore="+ratingBar.getRating(),Toast.LENGTH_SHORT).show();
                 Dialog dialog = new Dialog();
-                dialog.showMessageDialog(getActivity(),"Recensione inserita con successo",null);
-                //ReviewController.insertReview(getActivity(),commentEditText.getText().toString(),ratingBar.getRating(),id);
+                if(commentEditText.getText().toString().isEmpty() || ratingBar.getRating()==0){
+                    Toast.makeText(getActivity(),"Inserire una recensione valida",Toast.LENGTH_SHORT).show();
+                }else {
+
+
+                    dialog.showMessageDialog(getActivity(), "Recensione inserita con successo", null);
+                    ReviewController.insertReview(getActivity(), commentEditText.getText().toString(), ratingBar.getRating(), id);
+                }
             }
         });
 

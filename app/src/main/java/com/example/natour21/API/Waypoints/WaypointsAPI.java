@@ -23,7 +23,7 @@ public class WaypointsAPI {
     public static void insertWaypoints(Activity activity, double lat1, double lon1, double lat2, double lon2, VolleyCallback volleyCallback){
 
 
-        String url = Config.BASE_URL + Config.API + Config.INSERTWAYPOINTS;
+        String url = Config.BASE_URL+Config.API+Config.INSERTWAYPOINTS;
 
         JSONObject jsonBody = new JSONObject();
         try{

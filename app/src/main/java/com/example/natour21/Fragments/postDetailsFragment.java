@@ -1,11 +1,13 @@
 package com.example.natour21.Fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +30,7 @@ import com.directions.route.RoutingListener;
 import com.example.natour21.API.Review.ReviewAPI;
 import com.example.natour21.Constants;
 import com.example.natour21.Controller.PostController;
+import com.example.natour21.Dialog;
 import com.example.natour21.Item.PostItem;
 import com.example.natour21.PostDialog;
 import com.example.natour21.R;
@@ -129,7 +132,7 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
         valoreDifficoltà = v.findViewById(R.id.valoreDifficoltà_textView);
         valoreDifficoltà.setText(difficoltà);
 
-        valorePuntoInizio = v.findViewById(R.id.valoreDifficoltà_textView);
+        valorePuntoInizio = v.findViewById(R.id.valorePuntoInizio_textView);
         valorePuntoInizio.setText(startpoint);
 
         valoreDurata = v.findViewById(R.id.valoreDurata_textView);
@@ -343,8 +346,19 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void applyChanges(String difficulty, String minutes) {
         Toast.makeText(getActivity(),"diff"+difficulty+minutes+id,Toast.LENGTH_SHORT).show();
-        PostController.UpdatePost(getActivity(),difficulty,minutes,id);
-        postDialog.dismiss();
+        if(difficulty.isEmpty() || minutes.isEmpty()){
+            Toast.makeText(getActivity(),"Inserire tutti i campi",Toast.LENGTH_SHORT).show();
+        }else {
+            PostController.UpdatePost(getActivity(), difficulty, minutes, id);
+            Dialog dialog = new Dialog();
+            dialog.showMessageDialog(getActivity(),"Cambiamenti effettuati con successo",null);
+            postDialog.dismiss();
+        }
 
+    }
+
+    @Override
+    public void close() {
+        postDialog.dismiss();
     }
 }

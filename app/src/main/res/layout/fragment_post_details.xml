@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:id="@+id/motionLay"
     app:layoutDescription="@xml/fragment_post_details_scene"
-    tools:context=".Fragments.postDetailsFragment">
+    tools:context=".Fragments.postDetailsFragment"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"

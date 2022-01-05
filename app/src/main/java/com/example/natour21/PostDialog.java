@@ -21,7 +21,7 @@ public class PostDialog extends AppCompatDialogFragment {
 
     private EditText editTextDurata;
     private Spinner spinnerDifficoltà;
-    private Button confirmButton;
+    private Button confirmButton, cancelButton;
     private PostDialogListener listener;
 
     @NonNull
@@ -41,6 +41,8 @@ public class PostDialog extends AppCompatDialogFragment {
 
         confirmButton = view.findViewById(R.id.conferma_buttonDialog);
 
+        cancelButton = view.findViewById(R.id.annulla_buttonDialog);
+
 
 
 
@@ -56,6 +58,13 @@ public class PostDialog extends AppCompatDialogFragment {
 
 
 
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.close();
             }
         });
 
@@ -78,5 +87,6 @@ public class PostDialog extends AppCompatDialogFragment {
 
     public interface PostDialogListener{
         void applyChanges(String difficulty, String minutes);
+        void close();
     }
 }
