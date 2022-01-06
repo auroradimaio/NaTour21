@@ -35,6 +35,7 @@ import com.directions.route.RoutingListener;
 import com.example.natour21.Constants;
 import com.example.natour21.Controller.PostController;
 import com.example.natour21.Controller.WaypointsController;
+import com.example.natour21.Dialog;
 import com.example.natour21.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -201,7 +202,16 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
 
                     PostController.InsertPost(getActivity(), title.getText().toString(), description.getText().toString(), time.getText().toString()
                             , time_spinner.getSelectedItem().toString(), startPoint.getText().toString());
-                    WaypointsController.insertWaypoints(getActivity(),lat1,lng1,lat2,lng2);
+
+                    Dialog dialog = new Dialog();
+
+                    dialog.showMessageDialog(getActivity(), "Sentiero inserito corretamente", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            WaypointsController.insertWaypoints(getActivity(),lat1,lng1,lat2,lng2);
+
+                        }
+                    });
 
                     Toast.makeText(getActivity(), " valido", Toast.LENGTH_SHORT).show();
                 }
@@ -477,10 +487,16 @@ public class inserimentoItinerario extends Fragment implements OnMapReadyCallbac
 
 
 
+
                         Log.d(TAG, msg);
                     }
                     polyOptions.addAll(points);
                     map.addPolyline(polyOptions);
+                    lat1=minLat;
+                    lat2=maxLat;
+                    lng1=minLon;
+                    lng2=maxLon;
+
 
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     builder.include(new LatLng(maxLat,maxLon));

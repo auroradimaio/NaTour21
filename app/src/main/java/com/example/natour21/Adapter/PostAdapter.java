@@ -21,8 +21,10 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.natour21.Item.PostItem;
 import com.example.natour21.R;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -135,6 +137,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             tvMinuti = itemView.findViewById(R.id.textView_Minuti);
             mapView = itemView.findViewById(R.id.mapView2);
 
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -179,27 +183,37 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             PostItem postItem = (PostItem)mapView.getTag();
             if(postItem == null)
                 return;
-            LatLng loc1 = new LatLng(postItem.getLat1(),postItem.getLon1());
-            LatLng loc2 = new LatLng(postItem.getLat2(),postItem.getLon2());
-            getRoutingPath(loc1,loc2);
-            MarkerOptions markerOptions = (new MarkerOptions()).position(loc1);
-            MarkerOptions markerOptions2 = (new MarkerOptions()).position(loc2);
+            if(postItem.getLat1()==0 || postItem.getLat2()==0 || postItem.getLon1()==0 || postItem.getLon1()==0){
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(40.853294,14.305573))
+                        .zoom(9)
+                        .build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+                map.animateCamera(cameraUpdate);
+            }
+            else {
+                LatLng loc1 = new LatLng(postItem.getLat1(), postItem.getLon1());
+                LatLng loc2 = new LatLng(postItem.getLat2(), postItem.getLon2());
+                getRoutingPath(loc1, loc2);
+                MarkerOptions markerOptions = (new MarkerOptions()).position(loc1);
+                MarkerOptions markerOptions2 = (new MarkerOptions()).position(loc2);
             /*CameraPosition camPos = new CameraPosition.Builder()
                     .target(loc1)
                     .zoom(9)
                     .build();
             CameraUpdate camUp = CameraUpdateFactory.newCameraPosition(camPos);
             map.animateCamera(camUp);*/
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            builder.include(loc1);
-            builder.include(loc2);
-            map.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(),1));
-            map.setMinZoomPreference(100);
-            map.setMaxZoomPreference(100);
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(loc1);
+                builder.include(loc2);
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 1));
+                map.setMinZoomPreference(100);
+                map.setMaxZoomPreference(100);
 
-            map.addMarker(markerOptions);
-            map.addMarker(markerOptions2);
-            map.getUiSettings().setAllGesturesEnabled(false);
+                map.addMarker(markerOptions);
+                map.addMarker(markerOptions2);
+                map.getUiSettings().setAllGesturesEnabled(false);
+            }
         }
 
         public void bindView(PostItem postItem){
