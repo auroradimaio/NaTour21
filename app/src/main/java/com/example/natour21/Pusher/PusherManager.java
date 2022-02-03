@@ -31,10 +31,11 @@ public class PusherManager {
     private static Pusher pusher;
     public static Activity activity;
 
+   public static Channel channel_username;
 
 
-    public static void initChatListner()
-    {
+    public static void initChatListner() {
+
         PusherOptions options = new PusherOptions();
         options.setCluster("eu");
 
@@ -52,76 +53,74 @@ public class PusherManager {
             }
         }, ConnectionState.ALL);
 
-        Channel channel_username = pusher.subscribe(AuthenticationController.user_username);
+        if (AuthenticationController.user_username != null) {
+            channel_username = pusher.subscribe(AuthenticationController.user_username);
+        }
 
 
+        if (channel_username != null) {
 
-        channel_username.bind("newMessage", new SubscriptionEventListener() {
-            @Override
-            public void onEvent(PusherEvent event) {
-                if(event.getEventName().equals("newMessage"))
-                {
-                    try {
-                        JSONObject jsonObject = new JSONObject(event.getData());
-                        String from = jsonObject.getString("from");
-                        if(ChatController.onChatList) {
-                            ChatController.getChatList();
-                        }else if(ChatController.onSingleChat){
-                                if(ChatController.chattingWith.equals(from)) {
+            channel_username.bind("newMessage", new SubscriptionEventListener() {
+                @Override
+                public void onEvent(PusherEvent event) {
+                    if (event.getEventName().equals("newMessage")) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(event.getData());
+                            String from = jsonObject.getString("from");
+                            if (ChatController.onChatList) {
+                                ChatController.getChatList();
+                            } else if (ChatController.onSingleChat) {
+                                if (ChatController.chattingWith.equals(from)) {
                                     ChatController.updateSingleChat(from, jsonObject.getString("content"), jsonObject.getLong("time"));
-                                }else
-                                {
+                                } else {
                                     showToast(activity, "Nuovo messaggio da " + from);
                                 }
-                        }else
-                        {
-                            showToast(activity, "Nuovo messaggio da " + from);
-                        }
-                    } catch (JSONException jsonException) {
+                            } else {
+                                showToast(activity, "Nuovo messaggio da " + from);
+                            }
+                        } catch (JSONException jsonException) {
 
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        channel_username.bind("report", new SubscriptionEventListener() {
-            @Override
-            public void onEvent(PusherEvent event) {
-                if(event.getEventName().equals("report"))
-                {
-                    try {
-                        JSONObject jsonObject = new JSONObject(event.getData());
-                        String from = jsonObject.getString("from");
-                        if(ReportController.onReportList) {
+
+            channel_username.bind("report", new SubscriptionEventListener() {
+                @Override
+                public void onEvent(PusherEvent event) {
+                    if (event.getEventName().equals("report")) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(event.getData());
+                            String from = jsonObject.getString("from");
+                            if (ReportController.onReportList) {
+                                ReportController.getReportList();
+                            } else {
+                                showToast(activity, "Nuova segnalazione da " + from);
+                            }
+                        } catch (JSONException jsonException) {
+
+                        }
+                    }
+                }
+            });
+
+            channel_username.bind("report_response", new SubscriptionEventListener() {
+                @Override
+                public void onEvent(PusherEvent event) {
+                    if (event.getEventName().equals("report_response")) {
+                        String from = event.getData().replaceAll("^\"+|\"+$", "");
+                        if (ReportController.onReportList) {
                             ReportController.getReportList();
-                        }else
-                        {
-                            showToast(activity, "Nuova segnalazione da " + from);
+                        } else {
+                            showToast(activity, from + " ha risposto alla tua segnalazione");
                         }
-                    }catch (JSONException jsonException){
-
                     }
                 }
-            }
-        });
+            });
+        }
 
-        channel_username.bind("report_response", new SubscriptionEventListener() {
-            @Override
-            public void onEvent(PusherEvent event) {
-                if(event.getEventName().equals("report_response"))
-                {
-                    String from = event.getData().replaceAll("^\"+|\"+$", "");
-                    if(ReportController.onReportList) {
-                        ReportController.getReportList();
-                    }else
-                    {
-                        showToast(activity, from + " ha risposto alla tua segnalazione");
-                    }
-                }
-            }
-        });
     }
-
     private static void showToast(Activity activity, String message) {
         activity.runOnUiThread(new Runnable() {
             @Override

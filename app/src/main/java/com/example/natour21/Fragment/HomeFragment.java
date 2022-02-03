@@ -83,57 +83,56 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
         ReportController.onReportList = false;
         PusherManager.activity = getActivity();
 
+try {
+    View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+    mRecyclerView = view.findViewById(R.id.recycler_view);
+    mRecyclerView.setHasFixedSize(true);
+    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mRecyclerView = view.findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.green));
-
-
-        mPostList = new ArrayList<>();
-
-        userImage = view.findViewById(R.id.imgViewUser);
-        userImage.setImageResource(ImagePicker.getImage(AuthenticationController.user_username));
+    mSwipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+    mSwipeRefreshLayout.setOnRefreshListener(this);
+    mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.green));
 
 
-        mRequestQueue = Volley.newRequestQueue(getActivity());
+    mPostList = new ArrayList<>();
+
+    userImage = view.findViewById(R.id.imgViewUser);
+    userImage.setImageResource(ImagePicker.getImage(AuthenticationController.user_username));
 
 
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(true);
-
-                PostController.getPosts(getActivity(),HomeFragment.this,mPostList,mPostAdapter,mRecyclerView,mRequestQueue);
-
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
+    mRequestQueue = Volley.newRequestQueue(getActivity());
 
 
+    mSwipeRefreshLayout.post(new Runnable() {
+        @Override
+        public void run() {
+            mSwipeRefreshLayout.setRefreshing(true);
+
+            PostController.getPosts(getActivity(), HomeFragment.this, mPostList, mPostAdapter, mRecyclerView, mRequestQueue);
+
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+    });
 
 
-        Button button = (Button)view.findViewById(R.id.btnInsertPath);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_inserimentoItinerario);
+    Button button = (Button) view.findViewById(R.id.btnInsertPath);
+    button.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_inserimentoItinerario);
 
 
-
-            }
-        });
-
+        }
+    });
 
 
+    return view;
+}catch (Exception e){
+    Log.e("TESTCREATE", "onCreateView", e);
+    throw e;
 
-
-        return view;
+}
     }
 
 

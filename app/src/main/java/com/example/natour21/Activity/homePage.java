@@ -1,6 +1,8 @@
 package com.example.natour21.Activity;
 
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -18,6 +20,7 @@ public class homePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try{
         setContentView(R.layout.activity_home_page);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -34,7 +37,7 @@ public class homePage extends AppCompatActivity {
             AuthenticationController.logout(this, false);
             return true;
         });
-        
+
 
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -44,6 +47,10 @@ public class homePage extends AppCompatActivity {
         actionBar.show();
 
         PusherManager.initChatListner();
-    }
+    }catch (Exception e){
+            Log.e("TESTCREATEACTIVITY", "onCreateView", e);
+            throw e;
+        }
 
-}
+
+}}

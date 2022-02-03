@@ -35,6 +35,7 @@ import com.example.natour21.Dialog.PostDialog;
 import com.example.natour21.Item.ReviewItem;
 import com.example.natour21.R;
 import com.example.natour21.Utils.Constants;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -219,18 +220,26 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap gmap) {
         map=gmap;
 
+        if(lat1 == 0 || lat2 == 0 || lon1 == 0 || lon2 == 0){
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(new LatLng(40.853294,14.305573))
+                    .zoom(9)
+                    .build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+            map.moveCamera(cameraUpdate);
+        }else {
 
-        l1= new LatLng(lat1,lon1);
-        l2= new LatLng(lat2,lon2);
+            l1 = new LatLng(lat1, lon1);
+            l2 = new LatLng(lat2, lon2);
 
-        getRoutingPath(l1,l2);
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(l1);
-        builder.include(l2);
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(),48));
-        map.addMarker(new MarkerOptions().position(l1));
-        map.addMarker(new MarkerOptions().position(l2));
-
+            getRoutingPath(l1, l2);
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.include(l1);
+            builder.include(l2);
+            map.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 48));
+            map.addMarker(new MarkerOptions().position(l1));
+            map.addMarker(new MarkerOptions().position(l2));
+        }
 
     }
 

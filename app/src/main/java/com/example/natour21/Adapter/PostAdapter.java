@@ -160,6 +160,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         }
 
+        private void removeItem(int position){
+            mPostList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position,mPostList.size());
+        }
+
 
 
 
@@ -212,6 +218,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             mapView.setTag(postItem);
             setMapLocation();
         }
+
+
 
 
 

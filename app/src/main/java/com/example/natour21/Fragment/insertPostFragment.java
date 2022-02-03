@@ -16,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -203,9 +204,13 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
 
 
 
-                if((title.getText().toString().isEmpty() || min<1 || description.getText().toString().isEmpty() || time.getText().toString().isEmpty() || time_spinner.getSelectedItem().toString()
-                ==null || startPoint.getText().toString().isEmpty()) || (lat1 == 0 || lat2 == 0 || lng1 == 0 || lng2 == 0)){
+                if((title.getText().toString().isEmpty() || min<1 ||time.getText().toString().isEmpty() || time_spinner.getSelectedItem().toString()
+                ==null || startPoint.getText().toString().isEmpty())){
                     showMessageDialog(getActivity(),"Inserire tutti i campi/Sentiero non valido",null);
+                }else if((lat1 == 0 || lat2 == 0 || lng1 == 0 || lng2 == 0)){
+
+                    PostController.InsertPost(getActivity(), title.getText().toString(), description.getText().toString(), startPoint.getText().toString(), 0, 0
+                            ,0,0,time.getText().toString(),min,(Integer) time_spinner.getSelectedItem(), view);
                 }else
                 {
 
