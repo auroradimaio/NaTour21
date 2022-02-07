@@ -71,8 +71,16 @@ dependencies {
 
     //Dependency GoogleMaps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.google.maps:google-maps-services:1.0.1'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+
+
+
+
+
+
 
     //Dependency GPX
     implementation 'com.github.ticofab:android-gpx-parser:2.0.1'

@@ -76,8 +76,9 @@ public class PostAPITest {
     @Test
     public void insertPostTokenScaduto() {
 
+            PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                    durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenScaduto, new VolleyCallback() {
 
-            PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenScaduto, new VolleyCallback() {
                 @Override
                 public void onSuccess(String response) {
                     assertEquals("{\"result\":\"Access token scaduto\",\"status\":\"TOKEN_EXPIRED\"}", response);
@@ -85,42 +86,42 @@ public class PostAPITest {
 
                 @Override
                 public void onError(String response) {
-
                 }
             });
-
-
     }
+
+
     @Test
     public void insertPostValido(){
 
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido,
+                lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
                 assertEquals("\"status\":\"OK\"}",response.substring(response.length()-14));
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
 
+
     @Test
     public void insertPostUsernameNonRegistrato(){
 
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameNonRegistrato, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido,
+                lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameNonRegistrato, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
                 assertEquals("{\"result\":\"Username non registrato\",\"status\":\"FAILED\"}", response);
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
 
@@ -129,16 +130,16 @@ public class PostAPITest {
 
     @Test
     public void insertPostTitleNull(){
-        PostAPI.InsertPost(mHomePage, titoloNullo, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloNullo, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
                 assertEquals("{\"result\":\"Campi non validi\",\"status\":\"FAILED\"}", response);
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
 
@@ -147,55 +148,50 @@ public class PostAPITest {
 
     @Test
     public void insertPostDescriptionNull(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneNulla, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneNulla, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("\"status\":\"OK\"}",response.substring(response.length()-14));
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
-
     }
 
 
     @Test
     public void insertPostStartPointNull(){
 
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointNullo, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointNullo, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("{\"result\":\"Campi non validi\",\"status\":\"FAILED\"}", response);
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
-
     }
+
 
     @Test
     public void insertPostLat1Null(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Nullo, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Nullo, lon1Valido, lat2Valido, lon2Valido,
+                durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("\"status\":\"OK\"}",response.substring(response.length()-14));
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
@@ -203,51 +199,50 @@ public class PostAPITest {
 
     @Test
     public void insertPostLat2Null(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Nullo, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Nullo, lon2Valido,
+                durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("\"status\":\"OK\"}",response.substring(response.length()-14));
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
 
     @Test
     public void insertPostLon1Null(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Nullo, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Nullo, lat2Valido, lon2Valido,
+                durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("\"status\":\"OK\"}",response.substring(response.length()-14));
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
 
+
+
     @Test
     public void insertPostLon2Null(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Nullo, durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Nullo,
+                durationValida, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("\"status\":\"OK\"}",response.substring(response.length()-14));
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
@@ -256,68 +251,63 @@ public class PostAPITest {
     @Test
     public void insertPostDurationNull(){
 
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationNulla, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                durationNulla, minutesValidi,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("{\"result\":\"Campi non validi\",\"status\":\"FAILED\"}", response);
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
 
     @Test
     public void insertPostMinutesNull(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesNulli,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                durationValida, minutesNulli,difficoltàValida , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("{\"result\":\"Campi non validi\",\"status\":\"FAILED\"}", response);
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
 
     @Test
     public void insertPostDifficultyNull(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàNulla , userNameValido, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                durationValida, minutesValidi,difficoltàNulla , userNameValido, accessTokenValido, new VolleyCallback() {
+
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("{\"result\":\"Campi non validi\",\"status\":\"FAILED\"}", response);
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
 
+
     @Test
     public void insertPostUsernameNull(){
-        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido, durationValida, minutesValidi,difficoltàValida , userNameNullo, accessTokenValido, new VolleyCallback() {
+        PostAPI.InsertPost(mHomePage, titoloValido, descrizioneValida, startPointValido, lat1Valido, lon1Valido, lat2Valido, lon2Valido,
+                durationValida, minutesValidi,difficoltàValida , userNameNullo, accessTokenValido, new VolleyCallback() {
             @Override
             public void onSuccess(String response) {
-
                 assertEquals("{\"result\":\"Campi non validi\",\"status\":\"FAILED\"}", response);
-
             }
 
             @Override
             public void onError(String response) {
-
             }
         });
     }
