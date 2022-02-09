@@ -32,6 +32,7 @@ import com.example.natour21.Controller.ChatController;
 import com.example.natour21.Controller.PostController;
 import com.example.natour21.Controller.ReportController;
 import com.example.natour21.Item.PostItem;
+import com.example.natour21.Item.Report;
 import com.example.natour21.Pusher.PusherManager;
 import com.example.natour21.R;
 
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
     public static ArrayList<PostItem> mPostList;
     public static RequestQueue mRequestQueue;
     ImageView userImage;
-
+    public static ArrayList<Report> mReportList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -155,7 +156,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(),"pos="+position,Toast.LENGTH_LONG);
+        //Toast.makeText(getActivity(),"pos="+position,Toast.LENGTH_LONG);
         Fragment fragment = new Fragment();
         Bundle bundle = new Bundle();
         PostItem clickedItem = mPostList.get(position);
@@ -168,6 +169,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
         bundle.putDouble("Lon2",clickedItem.getLon2());
         bundle.putInt("Id",clickedItem.getId());
         bundle.putString("User",clickedItem.getUsername());
+
 
         fragment.setArguments(bundle);
 

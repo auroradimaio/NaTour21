@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +23,16 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.example.natour21.API.Report.ReportAPI;
+import com.example.natour21.Adapter.ReportListAdapter;
 import com.example.natour21.Adapter.ReviewAdapter;
 import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Controller.DifficultyController;
 import com.example.natour21.Controller.DurationController;
+import com.example.natour21.Controller.ReportController;
 import com.example.natour21.Controller.ReviewController;
 import com.example.natour21.Dialog.PostDialog;
+import com.example.natour21.Item.Report;
 import com.example.natour21.Item.ReviewItem;
 import com.example.natour21.R;
 import com.example.natour21.Utils.Constants;
@@ -55,13 +60,16 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     private RecyclerView mRecyclerView;
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewItem> mReviewList;
-    private RequestQueue mRequestQueue;
+    private RequestQueue mRequestQueue, mRequestqueue2;
     private RatingBar ratingBar;
     TextView valoreReview_textView;
     Button modifyButton, reviewButton, reportButton;
     PostDialog postDialog = new PostDialog();
     TextView valoreDifficoltà, valoreDurata, valorePuntoInizio;
     MotionLayout motionLayout;
+    ImageView infoReportImageView;
+    private ArrayList<Report> mReportList;
+
 
 
     @Override
@@ -84,6 +92,9 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
 
         View v = inflater.inflate(R.layout.fragment_post_details, container, false);
 
+
+
+
         mRecyclerView = (RecyclerView)v.findViewById(R.id.dettagli_RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -91,7 +102,6 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
         mReviewList = new ArrayList<>();
 
         mRequestQueue = Volley.newRequestQueue(getActivity());
-
 
 
 
@@ -111,6 +121,8 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
          lon2 = bundle.getDouble("Lon2");
          lat2 = bundle.getDouble("Lat2");
          id = bundle.getInt("Id");
+
+
 
 
 
@@ -192,6 +204,25 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
 
 
 
+        infoReportImageView = (ImageView)v.findViewById(R.id.report_imageView);
+        infoReportImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showMessageDialog(getActivity(),"Ci sono segnalazioni attive per questo post",null);
+            }
+        });
+
+
+        infoReportImageView.setVisibility(View.GONE);
+
+        mRequestqueue2 = Volley.newRequestQueue(getActivity());
+
+
+        ReportController.getReportById(id,infoReportImageView,mRequestqueue2);
+
+
+
+
 
 
 
@@ -265,6 +296,7 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
         mMapView.onResume();
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Dettagli sentiero");
+        actionBar.setDisplayHomeAsUpEnabled(false);
         DifficultyController.getDifficultyById(getActivity(),id,valoreDifficoltà,mRequestQueue);
         DurationController.getDurationById(getActivity(),id,valoreDurata,mRequestQueue);
     }
