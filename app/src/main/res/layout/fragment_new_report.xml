@@ -69,15 +69,15 @@
         android:layout_width="211dp"
         android:layout_height="98dp"
         android:layout_marginTop="200dp"
+        android:backgroundTint="@color/green"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:backgroundTint="@color/green"
-        android:textSize="15dp"
-        android:textColor="@color/green"
         android:hint="Inserisci la tua descrizione..."
+        android:inputType="textMultiLine"
+        android:textColor="@color/green"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,4 +106,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IntroReport_textView" />
+
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="354dp"
+        android:layout_height="382dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="80dp"
+        android:src="@drawable/ic_picture15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reportDescription_EditText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

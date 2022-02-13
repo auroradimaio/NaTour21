@@ -7,6 +7,16 @@
     tools:context=".Fragment.insertReviewFragment"
     >
 
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="573dp"
+        android:layout_height="727dp"
+        android:layout_marginTop="284dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_picture8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/pathName_textView"
         android:layout_width="wrap_content"
@@ -39,11 +49,11 @@
         android:id="@+id/rating_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:text="Valutazione"
-        android:textStyle="bold"
         android:textColor="@color/green"
         android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,4 +112,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/review_ratingBar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
