@@ -547,7 +547,7 @@ public class AuthenticationController {
         if(!isTokenExpired)
         {
             activity.startActivity(new Intent(activity, Login.class));
-            
+            activity.finish();
             if(auth.equals(Auth.FACEBOOK.toString()))
             {
                 LoginManager.getInstance().logOut();
