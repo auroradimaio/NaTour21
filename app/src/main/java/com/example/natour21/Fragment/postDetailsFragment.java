@@ -1,7 +1,6 @@
 package com.example.natour21.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,14 +70,14 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AuthenticationController.isOnHomePage = false;
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Dettagli sentiero");
         actionBar.setDisplayHomeAsUpEnabled(false);
         BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
         navView.setVisibility(navView.GONE);
         actionBar.show();
-
-
 
     }
 
@@ -88,6 +87,9 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
 
         View v = inflater.inflate(R.layout.fragment_post_details, container, false);
 
+
+        AuthenticationController.isOnHomePage = false;
+
         mRecyclerView = (RecyclerView)v.findViewById(R.id.dettagli_RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -95,11 +97,6 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
         mReviewList = new ArrayList<>();
 
         mRequestQueue = Volley.newRequestQueue(getActivity());
-
-
-
-
-
 
 
         Bundle bundle = this.getArguments();
@@ -210,15 +207,7 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
 
         mRequestqueue2 = Volley.newRequestQueue(getActivity());
 
-
         ReportController.getReportById(id,infoReportImageView,mRequestqueue2);
-
-
-
-
-
-
-
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -266,7 +255,6 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onPause() {
         super.onPause();
-        Log.i("ONPAUSE","On pause active");
         mMapView.onPause();
     }
 
@@ -286,8 +274,9 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("ONRESUME","On resume active");
         mMapView.onResume();
+
+        AuthenticationController.isOnHomePage = false;
         DifficultyController.getDifficultyById(getActivity(),id,valoreDifficoltà,mRequestQueue);
         DurationController.getDurationById(getActivity(),id,valoreDurata,mRequestQueue);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -323,7 +312,6 @@ public class postDetailsFragment extends Fragment implements OnMapReadyCallback,
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
 
 
-        Log.e("check", "onRoutingSuccess");
 
         List<Polyline> polylines = new ArrayList<>();
 

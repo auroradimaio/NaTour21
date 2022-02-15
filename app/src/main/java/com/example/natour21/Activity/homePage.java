@@ -1,11 +1,18 @@
 package com.example.natour21.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.example.natour21.Enumeration.Auth;
+import com.example.natour21.Fragment.ChatListFragment;
+import com.example.natour21.Fragment.HomeFragment;
+import com.example.natour21.Fragment.ReportsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Pusher.PusherManager;
@@ -44,6 +51,15 @@ public class homePage extends AppCompatActivity {
         actionBar.show();
 
         PusherManager.initChatListner();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!AuthenticationController.isOnHomePage)
+        {
+            super.onBackPressed();
+        }
+
     }
 
     @Override

@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.natour21.R;
 import com.facebook.*;
 import com.facebook.login.LoginManager;
@@ -183,4 +184,5 @@ public class Login extends AppCompatActivity {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
+
 }

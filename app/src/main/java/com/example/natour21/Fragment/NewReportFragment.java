@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Controller.ReportController;
 import com.example.natour21.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,6 +32,8 @@ public class NewReportFragment extends Fragment {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Inserisci Segnalazione");
+
+        AuthenticationController.isOnHomePage = false;
         actionBar.setDisplayHomeAsUpEnabled(false);
         BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
         navView.setVisibility(navView.GONE);
@@ -51,8 +54,7 @@ public class NewReportFragment extends Fragment {
         int id = bundle.getInt("IdPost");
 
 
-
-
+        AuthenticationController.isOnHomePage = false;
 
         pathName = v.findViewById(R.id.pathNameReport_textView);
         pathName.setText(title);

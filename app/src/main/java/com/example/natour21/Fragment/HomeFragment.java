@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
 
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.show();
-
+        AuthenticationController.isOnHomePage = true;
         super.onCreate(savedInstanceState);
 
     }
@@ -59,6 +59,10 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+
+
+        AuthenticationController.isOnHomePage = true;
+        ChatController.chattingWith = "";
         ChatController.onChatList = false;
         ChatController.onSingleChat = false;
         ReportController.onReportList = false;
@@ -115,6 +119,8 @@ public class HomeFragment extends Fragment implements PostAdapter.OnItemClickLis
         BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
         navView.setVisibility(navView.VISIBLE);
 
+        AuthenticationController.isOnHomePage = true;
+        ChatController.chattingWith = "";
         ChatController.onChatList = false;
         ChatController.onSingleChat = false;
         ReportController.onReportList = false;

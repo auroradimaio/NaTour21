@@ -29,6 +29,7 @@ public class AuthenticationController {
     public static String accessToken;
     public static String user_username;
     public static String auth;
+    public static boolean isOnHomePage=false;
 
 
     public static void checkLogin(AppCompatActivity activity)
@@ -48,6 +49,7 @@ public class AuthenticationController {
             else
             {
                 activity.startActivity(new Intent(activity, homePage.class));
+                activity.finish();
             }
         }
 

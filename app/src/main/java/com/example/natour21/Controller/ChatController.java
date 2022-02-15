@@ -2,7 +2,6 @@ package com.example.natour21.Controller;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import androidx.fragment.app.FragmentActivity;
 import com.example.natour21.API.Message.MessageAPI;
 import com.example.natour21.API.ChatRoom.ChatRoomAPI;

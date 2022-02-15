@@ -15,7 +15,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +35,7 @@ import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
+import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Controller.PostController;
 import com.example.natour21.R;
 import com.example.natour21.Utils.Constants;
@@ -109,17 +109,13 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AuthenticationController.isOnHomePage = false;
         BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
         navView.setVisibility(navView.GONE);
         setHasOptionsMenu(true);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.hide();
-
-
-
-
-
-
 
     }
 
@@ -132,8 +128,8 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
         handlePathOz = new HandlePathOz(getActivity(),this);
 
 
-            Places.initialize(getActivity(), "AIzaSyDVQ-0d9dN0BtMw0J4X45DeKwAJYKItnQE");
-
+        AuthenticationController.isOnHomePage = false;
+        Places.initialize(getActivity(), "AIzaSyDVQ-0d9dN0BtMw0J4X45DeKwAJYKItnQE");
 
         ActivityResultLauncher<Intent> activityFilePicker = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -177,14 +173,10 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onError(@NonNull Status status) {
-                Log.i(TAG, "An error occurred: " + status);
-
             }
 
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getLatLng());
-
 
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(place.getLatLng())
@@ -351,6 +343,7 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
     @Override
     public void onResume() {
         super.onResume();
+        AuthenticationController.isOnHomePage = false;
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.hide();
         mMapView.onResume();
@@ -463,7 +456,6 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
 
 
-        Log.e("check", "onRoutingSuccess");
 
         List<Polyline> polylines = new ArrayList<>();
 
@@ -558,11 +550,9 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
             List<Track> tracks = parsedGpx.getTracks();
             for (int i = 0; i < tracks.size(); i++) {
                 Track track = tracks.get(i);
-                Log.d(TAG, "track " + i + ":");
                 List<TrackSegment> segments = track.getTrackSegments();
                 for (int j = 0; j < segments.size(); j++) {
                     TrackSegment segment = segments.get(j);
-                    Log.d(TAG, "  segment " + j + ":");
                     for (TrackPoint trackPoint : segment.getTrackPoints()) {
                         String msg = "    point: lat " + trackPoint.getLatitude() + ", lon " + trackPoint.getLongitude() + ", time " + trackPoint.getTime();
                         LatLng l1 = new LatLng(trackPoint.getLatitude(), trackPoint.getLongitude());
@@ -576,9 +566,6 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
                         minLon = minLon != null ? Math.min(trackPoint.getLongitude(),minLon) : trackPoint.getLongitude();
 
 
-
-
-                        Log.d(TAG, msg);
                     }
                     polyOptions.addAll(points);
                     map.addPolyline(polyOptions);

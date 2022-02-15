@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Controller.ReviewController;
 import com.example.natour21.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,6 +33,8 @@ public class insertReviewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AuthenticationController.isOnHomePage = false;
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Inserisci Recensione");
         actionBar.setDisplayHomeAsUpEnabled(false);
