@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.natour21.Enumeration.Auth;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.Fragment.ChatListFragment;
 import com.example.natour21.Fragment.HomeFragment;
 import com.example.natour21.Fragment.ReportsFragment;
@@ -26,6 +27,8 @@ public class homePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        FirebaseLog.getInstance().stopTrace("login_natour21");
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 

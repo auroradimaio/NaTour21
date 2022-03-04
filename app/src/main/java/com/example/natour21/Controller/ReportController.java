@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import com.android.volley.RequestQueue;
 import com.example.natour21.API.Report.ReportAPI;
 import com.example.natour21.Activity.SingleReport;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.Item.Report;
 import com.example.natour21.Fragment.ReportsFragment;
 import com.example.natour21.Volley.VolleyCallback;
@@ -39,6 +40,7 @@ public class ReportController {
                 try{
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getString("status").equals("OK")) {
+                        FirebaseLog.getInstance().stopTrace("insertReport");
                         showMessageDialog(activity, "Segnalazione inviata con successo!", null);
                         Navigation.findNavController(view).popBackStack();
                     }

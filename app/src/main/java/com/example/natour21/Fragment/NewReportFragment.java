@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Controller.ReportController;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -33,6 +34,7 @@ public class NewReportFragment extends Fragment {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Inserisci Segnalazione");
 
+        FirebaseLog.getInstance().startTrace("insertReport");
         AuthenticationController.isOnHomePage = false;
         actionBar.setDisplayHomeAsUpEnabled(false);
         BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);

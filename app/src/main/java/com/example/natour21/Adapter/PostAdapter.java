@@ -238,9 +238,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         @Override
         public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
 
-
-            Log.e("check", "onRoutingSuccess");
-
             List<Polyline> polylines = new ArrayList<>();
 
 

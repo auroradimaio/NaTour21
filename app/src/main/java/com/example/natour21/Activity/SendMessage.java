@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.natour21.Controller.ChatController;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.R;
 
 import java.util.Locale;
@@ -19,6 +20,8 @@ public class SendMessage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_new_message);
+
+        FirebaseLog.getInstance().startTrace("send_new_message");
 
         sendMessageButton = findViewById(R.id.btnSendNewMessage);
         username = findViewById(R.id.username_new_message);

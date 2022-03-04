@@ -37,6 +37,7 @@ import com.directions.route.Routing;
 import com.directions.route.RoutingListener;
 import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Controller.PostController;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.R;
 import com.example.natour21.Utils.Constants;
 import com.google.android.gms.common.api.Status;
@@ -109,6 +110,8 @@ public class insertPostFragment extends Fragment implements OnMapReadyCallback, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseLog.getInstance().startTrace("insertPost");
 
         AuthenticationController.isOnHomePage = false;
         BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);

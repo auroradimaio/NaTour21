@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.example.natour21.API.Review.ReviewAPI;
 import com.example.natour21.Adapter.ReviewAdapter;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.Item.ReviewItem;
 import com.example.natour21.Volley.VolleyCallback;
 
@@ -39,6 +40,7 @@ public class ReviewController {
                 try{
                     JSONObject jsonObject = new JSONObject(response);
                     if(jsonObject.getString("status").equals("OK")){
+                        FirebaseLog.getInstance().stopTrace("insertReview");
                         showMessageDialog(activity, "Recensione inserita con successo", null);
                         Navigation.findNavController(view).popBackStack();
                     }else if(jsonObject.getString("status").equals("FAILED")){

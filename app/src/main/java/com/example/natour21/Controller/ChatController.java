@@ -7,6 +7,7 @@ import com.example.natour21.API.Message.MessageAPI;
 import com.example.natour21.API.ChatRoom.ChatRoomAPI;
 import com.example.natour21.Activity.SendMessage;
 import com.example.natour21.Activity.SingleChat;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.Item.ChatRoom;
 import com.example.natour21.Item.Message;
 import com.example.natour21.Fragment.ChatListFragment;
@@ -163,8 +164,8 @@ public class ChatController {
                         public void onSuccess(String response) {
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
-
                                 if (jsonObject.getString("status").equals("OK")) {
+                                    FirebaseLog.getInstance().stopTrace("send_new_message");
                                     activity.finish();
                                 } else if (jsonObject.getString("status").equals("FAILED")) {
                                     showMessageDialog(activity, "Impossibile trovare il nome utente", null);

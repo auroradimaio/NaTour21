@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.natour21.Controller.AuthenticationController;
 import com.example.natour21.Controller.ReviewController;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import static com.example.natour21.Dialog.Dialog.showMessageDialog;
@@ -34,6 +35,7 @@ public class insertReviewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FirebaseLog.getInstance().startTrace("insertReview");
         AuthenticationController.isOnHomePage = false;
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Inserisci Recensione");

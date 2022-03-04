@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.example.natour21.API.Post.PostAPI;
 import com.example.natour21.Adapter.PostAdapter;
+import com.example.natour21.FirebaseLog;
 import com.example.natour21.Fragment.HomeFragment;
 import com.example.natour21.Item.PostItem;
 import com.example.natour21.R;
@@ -44,6 +45,7 @@ public class PostController {
                     JSONObject jsonObject = new JSONObject(response);
                     if(jsonObject.getString("status").equals("OK"))
                     {
+                        FirebaseLog.getInstance().stopTrace("insertPost");
                         showMessageDialog(activity, "Post inserito con successo", null);
                         Navigation.findNavController(view).navigate(R.id.action_inserimentoItinerario_to_navigation_home);
                     }else if(jsonObject.getString("status").equals("FAILED")){
